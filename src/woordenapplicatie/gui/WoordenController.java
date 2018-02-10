@@ -6,7 +6,6 @@ package woordenapplicatie.gui;
  * and open the template in the editor.
  */
 
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
@@ -26,7 +25,6 @@ import woordenapplicatie.WoordenManager;
  * @author frankcoenen
  */
 public class WoordenController implements Initializable {
-    WoordenManager manager;
 
     private static final String DEFAULT_TEXT = "Een, twee, drie, vier\n" +
             "Hoedje van, hoedje van\n" +
@@ -47,6 +45,8 @@ public class WoordenController implements Initializable {
             "Zetten we 't in de glazenkas\n" +
             "Een, twee, drie, vier\n" +
             "Hoedje van papier";
+
+    private WoordenManager manager;
 
     @FXML
     private Button btAantal;
@@ -82,13 +82,13 @@ public class WoordenController implements Initializable {
     @FXML
     private void sorteerAction(ActionEvent event) {
         String[] gesplitteString = manager.splitString(taInput.getText());
-        TreeSet<String> worden = new TreeSet<>();
-        Collections.addAll(worden, gesplitteString);
-        String iets = "";
-        for(String s : worden.descendingSet()){
-            iets += s + "\n";
+        TreeSet<String> woorden = new TreeSet<>();
+        Collections.addAll(woorden, gesplitteString);
+        String alleWoorden = "";
+        for(String s : woorden.descendingSet()){
+            alleWoorden += s + "\n";
         }
-        taOutput.setText(iets);
+        taOutput.setText(alleWoorden);
     }
 
     @FXML
