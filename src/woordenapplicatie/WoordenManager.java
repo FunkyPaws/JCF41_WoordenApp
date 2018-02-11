@@ -1,8 +1,6 @@
 package woordenapplicatie;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class WoordenManager {
 
@@ -27,5 +25,25 @@ public class WoordenManager {
             }
         }
         return frequency;
+    }
+
+    public Map<String, Set<Integer>> getConcordatie(String string) {
+        TreeMap<String, Set<Integer>> concordatie = new TreeMap<>();
+        int lines = 0;
+        for (String line : string.toLowerCase().split("[\n]+")) {
+            lines++;
+            for(String word: line.split("[,\n ]+")){
+                if(word.isEmpty()){
+                    continue;
+                }
+                if(!concordatie.containsKey(word)){
+                    concordatie.put(word, new HashSet<>());
+                }
+                Set<Integer>set = concordatie.get(word);
+                set.add(lines);
+
+            }
+        }
+        return concordatie;
     }
 }

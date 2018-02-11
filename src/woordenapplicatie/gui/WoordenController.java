@@ -97,7 +97,8 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void concordatieAction(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Map<String, Set<Integer>> concordatie = manager.getConcordatie(taInput.getText());
+        taOutput.setText(concordatie.toString());
     }
 
 }
