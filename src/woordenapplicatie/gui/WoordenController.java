@@ -69,9 +69,7 @@ public class WoordenController implements Initializable {
         String[] gesplitteString = manager.splitString(taInput.getText());
         int amountTotal = manager.getAmountAllWords(gesplitteString);
 
-        Set<String> worden = new TreeSet<>();
-        Collections.addAll(worden, gesplitteString);
-        int amountDistinct = worden.size();
+        int amountDistinct = manager.getAmountDistinctWords(gesplitteString);
 
         taOutput.setText("Totaal aantal woorden: " + amountTotal + "\n" + "Verschillende woorden: " + amountDistinct);
     }

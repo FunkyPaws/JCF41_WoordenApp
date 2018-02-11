@@ -15,6 +15,12 @@ public class WoordenManager {
         return strings.length;
     }
 
+    public Integer getAmountDistinctWords(String[] strings){
+        Set<String> woorden = new TreeSet<>();
+        Collections.addAll(woorden, strings);
+        return woorden.size();
+    }
+
     public Map<String, Integer> getFrequency(String[] strings) {
         HashMap<String, Integer> frequency = new LinkedHashMap<>();
         for (String string : strings) {
