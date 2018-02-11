@@ -41,7 +41,6 @@ public class WoordenManager {
                 }
                 Set<Integer>set = concordatie.get(word);
                 set.add(lines);
-
             }
         }
         return concordatie;
