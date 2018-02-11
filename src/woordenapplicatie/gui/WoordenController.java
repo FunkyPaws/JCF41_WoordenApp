@@ -7,10 +7,7 @@ package woordenapplicatie.gui;
  */
 
 import java.net.URL;
-import java.util.Collections;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,7 +67,7 @@ public class WoordenController implements Initializable {
     @FXML
     private void aantalAction(ActionEvent event) {
         String[] gesplitteString = manager.splitString(taInput.getText());
-        int amountTotal = gesplitteString.length;
+        int amountTotal = manager.getAmountAllWords(gesplitteString);
 
         Set<String> worden = new TreeSet<>();
         Collections.addAll(worden, gesplitteString);
@@ -93,7 +90,9 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void frequentieAction(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String[] gesplitteString = manager.splitString(taInput.getText());
+        Map<String, Integer> frequency = manager.getFrequency(gesplitteString);
+        taOutput.setText(frequency.toString());
     }
 
     @FXML
