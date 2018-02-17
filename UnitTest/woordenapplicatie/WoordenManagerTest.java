@@ -3,6 +3,10 @@ package woordenapplicatie;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class WoordenManagerTest {
@@ -15,7 +19,7 @@ public class WoordenManagerTest {
     @Before
     public void setUp() throws Exception {
         manager = new WoordenManager();
-        testString1 = "This is the test string, randomly. allocated characters and words";
+        testString1 = "This is a test string, randomly.\n allocated characters and words";
         testString2 = "this is a test string";
         testString3 = "This is a test, a test this is";
     }
@@ -69,11 +73,34 @@ public class WoordenManagerTest {
 
         assertNotEquals(amount1, result2);
         assertNotEquals(amount2, result1);
-
     }
 
     @Test
     public void getFrequency() throws Exception {
+        HashMap<String, Integer> frequency1 = new LinkedHashMap<>();
+        frequency1.put("this", 2);
+        frequency1.put("is", 2);
+        frequency1.put("a", 2);
+        frequency1.put("test", 2);
+
+        HashMap<String, Integer> frequency2 = new LinkedHashMap<>();
+        frequency2.put("this", 1);
+        frequency2.put("is", 1);
+        frequency2.put("a", 1);
+        frequency2.put("test", 1);
+        frequency2.put("string", 1);
+
+        String[] test1 = manager.splitString(testString3);
+        String[] test2 = manager.splitString(testString2);
+
+        Map<String, Integer> result1 = manager.getFrequency(test1);
+        Map<String, Integer> result2 = manager.getFrequency(test2);
+
+        assertTrue(frequency1.equals(result1));
+        assertTrue(frequency2.equals(result2));
+
+        assertFalse(frequency1.equals(result2));
+        assertFalse(frequency2.equals(result1));
     }
 
     @Test
