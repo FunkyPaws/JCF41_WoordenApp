@@ -23,6 +23,7 @@ public class WoordenManagerTest {
     public void splitString() throws Exception {
         String[] result1 = manager.splitString(testString2);
         String[] result2 = testString2.split(" ");
+        
         String[] result3 = manager.splitString(testString1);
         String[] result4 = testString1.split("[,\n .]+");
 
@@ -35,6 +36,20 @@ public class WoordenManagerTest {
 
     @Test
     public void getAmountAllWords() throws Exception {
+        int amount1 = 10;
+        int amount2 = 5;
+
+        String[] test1 = manager.splitString(testString1);
+        String[] test2 = manager.splitString(testString2);
+
+        int result1 = manager.getAmountAllWords(test1);
+        int result2 = manager.getAmountAllWords(test2);
+
+        assertEquals(amount1, result1);
+        assertEquals(amount2, result2);
+
+        assertNotEquals(amount1, result2);
+        assertNotEquals(amount2, result1);
     }
 
     @Test
