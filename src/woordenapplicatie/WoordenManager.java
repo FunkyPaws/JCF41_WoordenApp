@@ -8,7 +8,7 @@ public class WoordenManager {
     }
 
     public String[] splitString(String string) {
-        return string.toLowerCase().split("[,\n ]+");
+        return string.toLowerCase().split("[,\n .]+");
     }
 
     public Integer getAmountAllWords(String[] strings) {
@@ -38,7 +38,7 @@ public class WoordenManager {
         int lines = 0;
         for (String line : string.toLowerCase().split("[\n]+")) {
             lines++;
-            for(String word: line.split("[,\n ]+")){
+            for(String word: line.split("[,\n .]+")){
                 if(word.isEmpty()){
                     continue;
                 }
