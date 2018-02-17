@@ -106,5 +106,4 @@ public class WoordenManagerTest {
     @Test
     public void getConcordatie() throws Exception {
     }
-
 }
