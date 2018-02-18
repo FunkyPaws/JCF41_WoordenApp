@@ -3,9 +3,7 @@ package woordenapplicatie;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -15,6 +13,7 @@ public class WoordenManagerTest {
     private String testString1;
     private String testString2;
     private String testString3;
+    private String testString4;
 
     @Before
     public void setUp() throws Exception {
@@ -22,6 +21,9 @@ public class WoordenManagerTest {
         testString1 = "This is a test string, randomly.\n allocated characters and words";
         testString2 = "this is a test string";
         testString3 = "This is a test, a test this is";
+        testString4 = "Een, twee, drie, vier\n" +
+                "Hoedje van, hoedje van\n" +
+                "Een, twee, drie, vier\n";
     }
 
     @Test
@@ -105,5 +107,21 @@ public class WoordenManagerTest {
 
     @Test
     public void getConcordatie() throws Exception {
+        TreeMap<String, Set<Integer>> concordatie = new TreeMap<>();
+        Set set1 = new HashSet();
+        set1.add(1);
+        set1.add(3);
+        concordatie.put("een", set1);
+        concordatie.put("twee", set1);
+        concordatie.put("drie", set1);
+        concordatie.put("vier", set1);
+        Set set2 = new HashSet();
+        set2.add(2);
+        concordatie.put("hoedje", set2);
+        concordatie.put("van", set2);
+
+        Map<String, Set<Integer>> test = manager.getConcordatie(testString4);
+
+        assertTrue(concordatie.equals(test));
     }
 }
