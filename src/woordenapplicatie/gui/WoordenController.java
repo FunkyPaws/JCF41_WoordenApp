@@ -1,11 +1,5 @@
 package woordenapplicatie.gui;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.net.URL;
 import java.util.*;
 
@@ -66,6 +60,7 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void aantalAction(ActionEvent event) {
+        //0(n)
         String[] gesplitteString = manager.splitString(taInput.getText());
         int amountTotal = manager.getAmountAllWords(gesplitteString);
 
@@ -76,8 +71,11 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void sorteerAction(ActionEvent event) {
+        //O(n)
         String[] gesplitteString = manager.splitString(taInput.getText());
+        //O(logn)
         TreeSet<String> woorden = new TreeSet<>();
+        //O(n)
         Collections.addAll(woorden, gesplitteString);
         String alleWoorden = "";
         for(String s : woorden.descendingSet()){
@@ -88,16 +86,31 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void frequentieAction(ActionEvent event) {
+        //O(n)
         String[] gesplitteString = manager.splitString(taInput.getText());
+        //O(1) haalt een hashmap op
         Map<String, Integer> frequency = manager.getFrequency(gesplitteString);
         taOutput.setText(frequency.toString());
     }
 
     @FXML
     private void concordatieAction(ActionEvent event) {
-        Map<String, Set<Integer>> concordatie = manager.getConcordatie(taInput.getText());
-        taOutput.setText(concordatie.toString());
+        HashMap<String, Set<Integer>> resultMap = (HashMap<String, Set<Integer>>) manager.getConcordatie(taInput.getText());
+        Set<String> allWords = resultMap.keySet();
+        StringBuilder outputString = new StringBuilder();
+        for (String word : allWords)
+        {
+            outputString.append(word).append(" [");
+
+            Set<Integer> lineOccurrences = resultMap.get(word);
+
+            for (Integer lineNumber : lineOccurrences)
+            {
+                outputString.append(lineNumber).append(",");
+            }
+            outputString.deleteCharAt(outputString.length() -1);
+            outputString.append("]\n");
+        }
+        taOutput.setText(outputString.toString());
     }
-
-
 }

@@ -107,7 +107,7 @@ public class WoordenManagerTest {
 
     @Test
     public void getConcordatie() throws Exception {
-        TreeMap<String, Set<Integer>> concordatie = new TreeMap<>();
+        HashMap<String, Set<Integer>> concordatie = new HashMap<>();
         Set set1 = new HashSet();
         set1.add(1);
         set1.add(3);

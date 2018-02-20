@@ -12,7 +12,7 @@ public class WoordenManager {
 
     public String[] splitString(String string) {
         long startTime = System.nanoTime();
-
+//O(n)
         String[] returnString = string.toLowerCase().split("[,\n .]+");
 
         long resultTime = System.nanoTime() - startTime;
@@ -51,7 +51,7 @@ public class WoordenManager {
     public Map<String, Integer> getFrequency(String[] strings) {
         long startTime = System.nanoTime();
 
-        HashMap<String, Integer> frequency = new LinkedHashMap<>();
+        HashMap<String, Integer> frequency = new HashMap<>();
         for (String string : strings) {
             if (frequency.containsKey(string)) {
                 frequency.put(string, frequency.get(string) + 1);
@@ -69,8 +69,8 @@ public class WoordenManager {
 
     public Map<String, Set<Integer>> getConcordatie(String string) {
         long startTime = System.nanoTime();
-
-        TreeMap<String, Set<Integer>> concordatie = new TreeMap<>();
+        //O(logn)
+        HashMap<String, Set<Integer>> concordatie = new HashMap<>();
         int lines = 0;
         for (String line : string.toLowerCase().split("[\n]+")) {
             lines++;
@@ -84,7 +84,7 @@ public class WoordenManager {
                 Set<Integer> set = concordatie.get(word);
                 set.add(lines);
             }
-        }
+        }//O(logn) * O(1)
 
         long resultTime = System.nanoTime() - startTime;
         String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
