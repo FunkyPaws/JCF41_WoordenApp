@@ -51,8 +51,7 @@ public class PerformanceTest {
     public void getAmountAllWords() throws Exception {
         long startTime = System.nanoTime();
 
-        String[] gesplitteString = manager.splitString(DEFAULT_TEXT);
-        manager.getAmountAllWords(gesplitteString);
+        manager.getAmountAllWords(DEFAULT_TEXT);
 
         long resultTime = System.nanoTime() - startTime;
         String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
@@ -63,6 +62,8 @@ public class PerformanceTest {
     public void getAmountDistinctWords() throws Exception {
         long startTime = System.nanoTime();
 
+        manager.getAmountDistinctWords(DEFAULT_TEXT);
+
         long resultTime = System.nanoTime() - startTime;
         String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
         logger.log(Level.INFO, logMessage);
@@ -71,6 +72,8 @@ public class PerformanceTest {
     @Test
     public void getFrequency() throws Exception {
         long startTime = System.nanoTime();
+
+        manager.getFrequency(DEFAULT_TEXT);
 
         long resultTime = System.nanoTime() - startTime;
         String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
@@ -81,9 +84,10 @@ public class PerformanceTest {
     public void getConcordatie() throws Exception {
         long startTime = System.nanoTime();
 
+        manager.getConcordatie(DEFAULT_TEXT);
+
         long resultTime = System.nanoTime() - startTime;
         String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
         logger.log(Level.INFO, logMessage);
     }
-
 }

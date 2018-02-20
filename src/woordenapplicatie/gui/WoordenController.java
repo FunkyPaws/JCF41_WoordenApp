@@ -60,12 +60,8 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void aantalAction(ActionEvent event) {
-        //0(n)
-        String[] gesplitteString = manager.splitString(taInput.getText());
-        int amountTotal = manager.getAmountAllWords(gesplitteString);
-
-        int amountDistinct = manager.getAmountDistinctWords(gesplitteString);
-
+        int amountTotal = manager.getAmountAllWords(taInput.getText());
+        int amountDistinct = manager.getAmountDistinctWords(taInput.getText());
         taOutput.setText("Totaal aantal woorden: " + amountTotal + "\n" + "Verschillende woorden: " + amountDistinct);
     }
 
@@ -86,10 +82,8 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void frequentieAction(ActionEvent event) {
-        //O(n)
-        String[] gesplitteString = manager.splitString(taInput.getText());
         //O(1) haalt een hashmap op
-        Map<String, Integer> frequency = manager.getFrequency(gesplitteString);
+        Map<String, Integer> frequency = manager.getFrequency(taInput.getText());
         taOutput.setText(frequency.toString());
     }
 

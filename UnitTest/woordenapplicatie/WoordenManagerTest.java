@@ -46,11 +46,8 @@ public class WoordenManagerTest {
         int amount1 = 10;
         int amount2 = 5;
 
-        String[] test1 = manager.splitString(testString1);
-        String[] test2 = manager.splitString(testString2);
-
-        int result1 = manager.getAmountAllWords(test1);
-        int result2 = manager.getAmountAllWords(test2);
+        int result1 = manager.getAmountAllWords(testString1);
+        int result2 = manager.getAmountAllWords(testString2);
 
         assertEquals(amount1, result1);
         assertEquals(amount2, result2);
@@ -64,11 +61,8 @@ public class WoordenManagerTest {
         int amount1 = 5;
         int amount2 = 4;
 
-        String[] test1 = manager.splitString(testString2);
-        String[] test2 = manager.splitString(testString3);
-
-        int result1 = manager.getAmountDistinctWords(test1);
-        int result2 = manager.getAmountDistinctWords(test2);
+        int result1 = manager.getAmountDistinctWords(testString2);
+        int result2 = manager.getAmountDistinctWords(testString3);
 
         assertEquals(amount1, result1);
         assertEquals(amount2, result2);
@@ -92,11 +86,8 @@ public class WoordenManagerTest {
         frequency2.put("test", 1);
         frequency2.put("string", 1);
 
-        String[] test1 = manager.splitString(testString3);
-        String[] test2 = manager.splitString(testString2);
-
-        Map<String, Integer> result1 = manager.getFrequency(test1);
-        Map<String, Integer> result2 = manager.getFrequency(test2);
+        Map<String, Integer> result1 = manager.getFrequency(testString3);
+        Map<String, Integer> result2 = manager.getFrequency(testString2);
 
         assertTrue(frequency1.equals(result1));
         assertTrue(frequency2.equals(result2));

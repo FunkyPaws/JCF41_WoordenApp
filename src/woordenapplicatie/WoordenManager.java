@@ -11,45 +11,30 @@ public class WoordenManager {
     }
 
     public String[] splitString(String string) {
-        long startTime = System.nanoTime();
-//O(n)
+        //O(n)
         String[] returnString = string.toLowerCase().split("[,\n .]+");
-
-        long resultTime = System.nanoTime() - startTime;
-        String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
-        logger.log(Level.INFO, logMessage);
-
         return returnString;
     }
 
-    public Integer getAmountAllWords(String[] strings) {
-        long startTime = System.nanoTime();
-
+    public Integer getAmountAllWords(String string) {
+        //O(n)
+        String[] strings = this.splitString(string);
         Integer returnInt = strings.length;
-
-        long resultTime = System.nanoTime() - startTime;
-        String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
-        logger.log(Level.INFO, logMessage);
-
         return returnInt;
     }
 
-    public Integer getAmountDistinctWords(String[] strings) {
-        long startTime = System.nanoTime();
-
+    public Integer getAmountDistinctWords(String string) {
+        //O(n)
+        String[] strings = this.splitString(string);
+        //O(log n)
         Set<String> woorden = new TreeSet<>();
         Collections.addAll(woorden, strings);
         Integer returnInt = woorden.size();
-
-        long resultTime = System.nanoTime() - startTime;
-        String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
-        logger.log(Level.INFO, logMessage);
-
         return returnInt;
     }
 
-    public Map<String, Integer> getFrequency(String[] strings) {
-        long startTime = System.nanoTime();
+    public Map<String, Integer> getFrequency(String text) {
+        String[] strings = this.splitString(text);
 
         HashMap<String, Integer> frequency = new HashMap<>();
         for (String string : strings) {
@@ -59,16 +44,10 @@ public class WoordenManager {
                 frequency.put(string, 1);
             }
         }
-
-        long resultTime = System.nanoTime() - startTime;
-        String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
-        logger.log(Level.INFO, logMessage);
-
         return frequency;
     }
 
     public Map<String, Set<Integer>> getConcordatie(String string) {
-        long startTime = System.nanoTime();
         //O(logn)
         HashMap<String, Set<Integer>> concordatie = new HashMap<>();
         int lines = 0;
@@ -85,11 +64,6 @@ public class WoordenManager {
                 set.add(lines);
             }
         }//O(logn) * O(1)
-
-        long resultTime = System.nanoTime() - startTime;
-        String logMessage = String.format("getSplitText - Time measured: %d nanoseconds", resultTime);
-        logger.log(Level.INFO, logMessage);
-
         return concordatie;
     }
 }
