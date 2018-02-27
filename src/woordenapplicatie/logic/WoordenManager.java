@@ -1,16 +1,16 @@
-package woordenapplicatie;
+package woordenapplicatie.logic;
 
+import java.lang.reflect.Array;
 import java.util.*;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class WoordenManager {
+public class WoordenManager implements ILogic{
     private static final Logger logger = Logger.getLogger(WoordenManager.class.getName());
 
     public WoordenManager() {
     }
 
-    public String[] splitString(String string) {
+    private String[] splitString(String string) {
         //O(n)
         String[] returnString = string.toLowerCase().split("[,\n .]+");
         return returnString;
@@ -24,13 +24,17 @@ public class WoordenManager {
     }
 
     public Integer getAmountDistinctWords(String string) {
-        //O(n)
         String[] strings = this.splitString(string);
-        //O(log n)
         Set<String> woorden = new TreeSet<>();
         Collections.addAll(woorden, strings);
         Integer returnInt = woorden.size();
         return returnInt;
+    }
+
+    public Iterator<String> getSorteerAction(String string) {
+        String[] gesplitteString = this.splitString(string);
+        TreeSet<String> woorden = new TreeSet<>(Arrays.asList(gesplitteString));
+        return woorden.descendingIterator();
     }
 
     public Map<String, Integer> getFrequency(String text) {

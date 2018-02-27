@@ -8,7 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import woordenapplicatie.WoordenManager;
+import woordenapplicatie.logic.ILogic;
+import woordenapplicatie.logic.WoordenManager;
 
 /**
  * FXML Controller class
@@ -37,8 +38,6 @@ public class WoordenController implements Initializable {
             "Een, twee, drie, vier\n" +
             "Hoedje van papier";
 
-    private WoordenManager manager;
-
     @FXML
     private Button btAantal;
     @FXML
@@ -52,57 +51,56 @@ public class WoordenController implements Initializable {
     @FXML
     private TextArea taOutput;
 
+    private ILogic logic;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         taInput.setText(DEFAULT_TEXT);
-        manager = new WoordenManager();
+        logic = new WoordenManager();
     }
 
     @FXML
     private void aantalAction(ActionEvent event) {
-        int amountTotal = manager.getAmountAllWords(taInput.getText());
-        int amountDistinct = manager.getAmountDistinctWords(taInput.getText());
+        int amountTotal = logic.getAmountAllWords(taInput.getText());
+        int amountDistinct = logic.getAmountDistinctWords(taInput.getText());
         taOutput.setText("Totaal aantal woorden: " + amountTotal + "\n" + "Verschillende woorden: " + amountDistinct);
     }
 
     @FXML
     private void sorteerAction(ActionEvent event) {
-        //O(n)
-        String[] gesplitteString = manager.splitString(taInput.getText());
-        //O(logn)
-        TreeSet<String> woorden = new TreeSet<>();
-        //O(n)
-        Collections.addAll(woorden, gesplitteString);
-        String alleWoorden = "";
-        for(String s : woorden.descendingSet()){
-            alleWoorden += s + "\n";
+
+        Iterator<String> iterator = logic.getSorteerAction(taInput.getText());
+        StringBuilder builder = new StringBuilder();
+        while (iterator.hasNext()){
+            builder.append(iterator.next());
+            if(iterator.hasNext()){
+                builder.append("\n");
+            }
         }
-        taOutput.setText(alleWoorden);
+        taOutput.setText(builder.toString());
     }
 
     @FXML
     private void frequentieAction(ActionEvent event) {
         //O(1) haalt een hashmap op
-        Map<String, Integer> frequency = manager.getFrequency(taInput.getText());
+        Map<String, Integer> frequency = logic.getFrequency(taInput.getText());
         taOutput.setText(frequency.toString());
     }
 
     @FXML
     private void concordatieAction(ActionEvent event) {
-        HashMap<String, Set<Integer>> resultMap = (HashMap<String, Set<Integer>>) manager.getConcordatie(taInput.getText());
+        HashMap<String, Set<Integer>> resultMap = (HashMap<String, Set<Integer>>) logic.getConcordatie(taInput.getText());
         Set<String> allWords = resultMap.keySet();
         StringBuilder outputString = new StringBuilder();
-        for (String word : allWords)
-        {
+        for (String word : allWords) {
             outputString.append(word).append(" [");
 
             Set<Integer> lineOccurrences = resultMap.get(word);
 
-            for (Integer lineNumber : lineOccurrences)
-            {
+            for (Integer lineNumber : lineOccurrences) {
                 outputString.append(lineNumber).append(",");
             }
-            outputString.deleteCharAt(outputString.length() -1);
+            outputString.deleteCharAt(outputString.length() - 1);
             outputString.append("]\n");
         }
         taOutput.setText(outputString.toString());
